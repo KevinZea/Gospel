@@ -12,7 +12,7 @@ const Hero = () => {
         <Box
             id="home"
             h="100vh"
-            bg="linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/src/assets/portada.jpg') no-repeat"
+            bg="linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/portada.jpg') no-repeat"
             bgSize="cover"
             bgPosition="center"
             color="white"
