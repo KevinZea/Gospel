@@ -1,0 +1,6 @@
+Correcciones Gospel
+
+- agregar peticiones oraciones
+- agregar sistema de correos
+- agregar pasarela de pagos para las donaciones
+- cambiar imagenes

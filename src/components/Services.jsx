@@ -8,17 +8,39 @@ const MotionBox = motion(Box);
 const ServiceCard = ({ title, description, icon }) => {
     return (
         <MotionBox
-            whileHover={{ y: -10 }}
-            p={6}
-            bg="white"
-            borderRadius="lg"
-            boxShadow="lg"
+            whileHover={{
+                y: -10,
+                boxShadow: "0 20px 40px rgba(225, 173, 1, 0.3)"
+            }}
+            transition={{ duration: 0.3 }}
+            p={8}
+            bg="gray.800"
+            borderRadius="xl"
+            boxShadow="xl"
             textAlign="center"
+            border="2px solid"
+            borderColor="transparent"
+            _hover={{
+                borderColor: "#e1ad01"
+            }}
         >
-            <VStack spacing={4}>
-                <Icon as={icon} w={10} h={10} color="brand.500" />
-                <Heading size="md">{title}</Heading>
-                <Text color="gray.600">{description}</Text>
+            <VStack spacing={5}>
+                <Box
+                    p={4}
+                    bg="#e1ad01"
+                    borderRadius="full"
+                    display="inline-flex"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <Icon as={icon} w={8} h={8} color="gray.900" />
+                </Box>
+                <Heading size="md" color="white" fontWeight="bold">
+                    {title}
+                </Heading>
+                <Text color="gray.300" fontSize="md" lineHeight="tall">
+                    {description}
+                </Text>
             </VStack>
         </MotionBox>
     );
@@ -49,12 +71,28 @@ const Services = () => {
     ];
 
     return (
-        <Box id="services" py={20} bg="gray.50">
+        <Box id="services" py={20} bg="gray.900">
             <Container maxW="1200px">
-                <VStack spacing={12}>
-                    <Box textAlign="center">
-                        <Heading mb={4}>Nuestros Servicios</Heading>
-                        <Text color="gray.600" fontSize="lg">
+                <VStack spacing={16}>
+                    <Box textAlign="center" maxW="700px">
+                        <Heading
+                            mb={4}
+                            color="white"
+                            fontSize={{ base: "3xl", md: "4xl" }}
+                            position="relative"
+                            _after={{
+                                content: '""',
+                                display: "block",
+                                width: "80px",
+                                height: "4px",
+                                bg: "#e1ad01",
+                                margin: "20px auto 0",
+                                borderRadius: "full"
+                            }}
+                        >
+                            Nuestros Servicios
+                        </Heading>
+                        <Text color="gray.400" fontSize="lg" mt={6}>
                             Descubre las diferentes formas en las que puedes participar en nuestra comunidad
                         </Text>
                     </Box>

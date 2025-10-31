@@ -1,8 +1,9 @@
 // src/components/Header.jsx
-import { Box, Flex, Button, IconButton, useDisclosure, VStack, HStack } from '@chakra-ui/react';
+import { Box, Flex, Button, IconButton, useDisclosure, VStack, HStack, Image } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
+import logo from '../assets/logo.png';
 
 const MotionBox = motion(Box);
 
@@ -24,31 +25,35 @@ const Header = () => {
             top="0"
             width="100%"
             zIndex="1000"
-            bg="white"
-            boxShadow="0 2px 10px rgba(0,0,0,0.1)"
+            bg="gray.900"
+            boxShadow="0 4px 20px rgba(0,0,0,0.3)"
+            borderBottom="3px solid"
+            borderColor="#e1ad01"
         >
             <Flex
-                h={16}
+                h={20}
                 alignItems="center"
                 justifyContent="space-between"
                 mx="auto"
-                px={4}
+                px={6}
                 maxW="1200px"
             >
                 <MotionBox
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
                 >
-                    <Box fontSize="2xl" fontWeight="bold" color="brand.500">
-                        Gospel
+                    <Box
+                        w={150}
+                        h={145}
+                        filter="drop-shadow(0 2px 8px rgba(225, 173, 1, 0.3))"
+                    >
+                        <Image src={logo} alt="Logo" w={"100%"} h={"100%"} objectFit="contain" />
                     </Box>
                 </MotionBox>
 
                 {/* Desktop Menu */}
-                <HStack
-                    spacing={8}
-                    display={{ base: 'none', md: 'flex' }}
-                >
+                <HStack spacing={2}>
                     {menuItems.map((item) => (
                         <Link
                             key={item.name}
@@ -56,9 +61,43 @@ const Header = () => {
                             spy={true}
                             smooth={true}
                             duration={500}
-                            offset={-70}
+                            offset={-80}
                         >
-                            <Button variant="ghost" color="gray.600" _hover={{ color: 'brand.500' }}>
+                            <Button
+                                variant="ghost"
+                                color='#e1ad01'
+                                fontWeight="semibold"
+                                fontSize="lg"
+                                px={5}
+                                py={6}
+                                position="relative"
+                                _hover={{
+                                    color: 'white',
+                                    bg: 'rgba(225, 173, 1, 0.1)',
+                                    transform: 'translateY(-2px)'
+                                }}
+                                _active={{
+                                    bg: 'rgba(225, 173, 1, 0.2)'
+                                }}
+                                transition="all 0.3s ease"
+                                _after={{
+                                    content: '""',
+                                    position: 'absolute',
+                                    bottom: '8px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    width: '0',
+                                    height: '2px',
+                                    bg: '#e1ad01',
+                                    transition: 'width 0.3s ease'
+                                }}
+                                sx={{
+                                    '&:hover::after': {
+                                        width: '70%'
+                                    }
+                                }}
+                                display={{ base: 'none', md: 'flex' }}
+                            >
                                 {item.name}
                             </Button>
                         </Link>
@@ -71,32 +110,65 @@ const Header = () => {
                     onClick={onToggle}
                     icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
                     variant="ghost"
+                    color="#e1ad01"
+                    fontSize="xl"
+                    _hover={{
+                        bg: 'rgba(225, 173, 1, 0.2)',
+                        color: 'white'
+                    }}
                     aria-label="Toggle Navigation"
                 />
             </Flex>
 
             {/* Mobile Menu */}
-            <VStack
-                display={{ base: isOpen ? 'flex' : 'none', md: 'none' }}
-                pb={4}
-                bg="white"
+            <MotionBox
+                display={{ base: isOpen ? 'block' : 'none', md: 'none' }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
+                transition={{ duration: 0.3 }}
+                bg="gray.800"
+                borderTop="1px solid"
+                borderColor="gray.700"
             >
-                {menuItems.map((item) => (
-                    <Link
-                        key={item.name}
-                        to={item.to}
-                        spy={true}
-                        smooth={true}
-                        duration={500}
-                        offset={-70}
-                        onClick={onToggle}
-                    >
-                        <Button w="100%" variant="ghost">
-                            {item.name}
-                        </Button>
-                    </Link>
-                ))}
-            </VStack>
+                <VStack
+                    spacing={0}
+                    py={4}
+                    divider={<Box borderColor="gray.700" />}
+                >
+                    {menuItems.map((item) => (
+                        <Link
+                            key={item.name}
+                            to={item.to}
+                            spy={true}
+                            smooth={true}
+                            duration={500}
+                            offset={-80}
+                            onClick={onToggle}
+                            style={{ width: '100%' }}
+                        >
+                            <Button
+                                w="100%"
+                                variant="ghost"
+                                color="#e1ad01"
+                                fontWeight="semibold"
+                                fontSize="lg"
+                                py={6}
+                                _hover={{
+                                    bg: 'rgba(225, 173, 1, 0.15)',
+                                    color: 'white'
+                                }}
+                                _active={{
+                                    bg: 'rgba(225, 173, 1, 0.25)'
+                                }}
+                                justifyContent="flex-start"
+                                pl={8}
+                            >
+                                {item.name}
+                            </Button>
+                        </Link>
+                    ))}
+                </VStack>
+            </MotionBox>
         </Box>
     );
 };
