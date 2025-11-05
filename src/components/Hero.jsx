@@ -1,7 +1,8 @@
 // src/components/Hero.jsx
-import { Box, Container, Heading, Text, Button, Stack } from '@chakra-ui/react';
+import { Box, Container, Heading, Text, Button, Stack, Image } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import portada from '../assets/portada.jpg';
+import logo from '../assets/logo.png';
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -33,7 +34,7 @@ const Hero = () => {
                         fontWeight="bold"
                     >
                         Bienvenido a
-                        <Text  fontFamily={"Technohideo"}>
+                        <Text as="span" display="block" fontFamily="Technohideo">
                             Gospel
                         </Text>
                     </MotionHeading>
@@ -58,13 +59,62 @@ const Hero = () => {
                         <Button
                             size="lg"
                             bg="#e1ad01"
-                            color={"gray.700"}
-                            _hover={{ bg: 'white' }}
+                            color="gray.900"
+                            fontWeight="bold"
+                            px={8}
+                            py={6}
+                            fontSize="lg"
+                            position="relative"
+                            overflow="hidden"
+                            _hover={{
+                                bg: 'gray.900',
+                                transform: 'translateY(-2px)',
+                                boxShadow: '0 8px 24px rgba(225, 173, 1, 0.4)'
+                            }}
+                            _active={{
+                                transform: 'translateY(0)'
+                            }}
+                            transition="all 0.3s ease"
                             onClick={() => {
                                 document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
                             }}
                         >
-                            Descubre Más
+                            <Box
+                                position="absolute"
+                                top="50%"
+                                left="50%"
+                                transform="translate(-50%, -50%)"
+                                opacity={0}
+                                transition="opacity 0.3s ease"
+                                pointerEvents="none"
+                                zIndex={1}
+                                sx={{
+                                    'button:hover &': {
+                                        opacity: 1
+                                    }
+                                }}
+                            >
+                                <Image
+                                    src={logo}
+                                    alt="Gospel Logo"
+                                    h="100px"
+                                    w="auto"
+                                    filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))"
+                                />
+                            </Box>
+
+                            <Text
+                                position="relative"
+                                zIndex={2}
+                                transition="opacity 0.3s ease"
+                                sx={{
+                                    'button:hover &': {
+                                        opacity: 0
+                                    }
+                                }}
+                            >
+                                Descubre Más
+                            </Text>
                         </Button>
                     </MotionBox>
                 </Stack>

@@ -1,0 +1,7 @@
+/* src/fonts.css */
+@font-face {
+    font-family: 'Technohideo';
+    src: url('./Fonts/techno_hideo_bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

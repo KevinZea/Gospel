@@ -5,20 +5,75 @@ import { motion } from 'framer-motion';
 
 const MotionBox = motion(Box);
 
+const InfoItem = ({ icon, title, children }) => {
+    return (
+        <MotionBox
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+        >
+            <HStack
+                spacing={4}
+                align="start"
+                p={5}
+                bg="gray.800"
+                borderRadius="lg"
+                border="1px solid"
+                borderColor="gray.700"
+                _hover={{
+                    borderColor: "#e1ad01",
+                    boxShadow: "0 4px 20px rgba(225, 173, 1, 0.2)"
+                }}
+                transition="all 0.3s ease"
+            >
+                <Box
+                    bg="rgba(225, 173, 1, 0.1)"
+                    p={3}
+                    borderRadius="lg"
+                    flexShrink={0}
+                >
+                    <Icon as={icon} color="#e1ad01" w={6} h={6} />
+                </Box>
+                <VStack align="start" spacing={2}>
+                    <Text fontWeight="bold" color="white" fontSize="lg">
+                        {title}
+                    </Text>
+                    <Box color="gray.300">
+                        {children}
+                    </Box>
+                </VStack>
+            </HStack>
+        </MotionBox>
+    );
+};
+
 const Location = () => {
     return (
-        <Box id="location" py={20} bg="gray.50">
+        <Box id="location" py={20} bg="gray.900">
             <Container maxW="1200px">
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-                    <VStack align="start" spacing={6}>
+                <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={12}>
+                    <VStack align="start" spacing={8}>
                         <MotionBox
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
                             viewport={{ once: true }}
+                            width="100%"
                         >
-                            <Heading>Nuestra Ubicación</Heading>
-                            <Text color="gray.600" fontSize="lg" mt={4}>
+                            <Heading
+                                color="white"
+                                fontSize={{ base: "3xl", md: "4xl" }}
+                                mb={4}
+                            >
+                                Nuestra Ubicación
+                            </Heading>
+                            <Box
+                                width="80px"
+                                height="4px"
+                                bg="#e1ad01"
+                                borderRadius="full"
+                                mb={6}
+                            />
+                            <Text color="gray.400" fontSize="lg" lineHeight="tall">
                                 Te esperamos en nuestras instalaciones para ser parte de esta maravillosa comunidad
                             </Text>
                         </MotionBox>
@@ -28,53 +83,69 @@ const Location = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                             viewport={{ once: true }}
+                            width="100%"
                         >
-                            <VStack align="start" spacing={6} width="100%">
-                                <HStack spacing={4}>
-                                    <Icon as={FaMapMarkerAlt} color="brand.500" w={6} h={6} />
-                                    <VStack align="start" spacing={1}>
-                                        <Text fontWeight="bold">Dirección</Text>
-                                        <Text>123 Calle Principal, Ciudad</Text>
-                                    </VStack>
-                                </HStack>
+                            <VStack align="stretch" spacing={4} width="100%">
+                                <InfoItem icon={FaMapMarkerAlt} title="Dirección">
+                                    <Text>123 Calle Principal, Ciudad</Text>
+                                </InfoItem>
 
-                                <HStack spacing={4}>
-                                    <Icon as={FaPhone} color="brand.500" w={6} h={6} />
-                                    <VStack align="start" spacing={1}>
-                                        <Text fontWeight="bold">Teléfono</Text>
-                                        <Text>+1 234 567 8900</Text>
-                                    </VStack>
-                                </HStack>
+                                <InfoItem icon={FaPhone} title="Teléfono">
+                                    <Text>+1 234 567 8900</Text>
+                                </InfoItem>
 
-                                <HStack spacing={4}>
-                                    <Icon as={FaEnvelope} color="brand.500" w={6} h={6} />
-                                    <VStack align="start" spacing={1}>
-                                        <Text fontWeight="bold">Email</Text>
-                                        <Text>contacto@gospel.com</Text>
-                                    </VStack>
-                                </HStack>
+                                <InfoItem icon={FaEnvelope} title="Email">
+                                    <Text>contacto@gospel.com</Text>
+                                </InfoItem>
 
-                                <HStack spacing={4}>
-                                    <Icon as={FaClock} color="brand.500" w={6} h={6} />
+                                <InfoItem icon={FaClock} title="Horarios de Servicio">
                                     <VStack align="start" spacing={1}>
-                                        <Text fontWeight="bold">Horarios de Servicio</Text>
-                                        <Text>Domingo: 10:00 AM - 8:00 PM</Text>
-                                        <Text>Miércoles: 7:00 PM - 9:00 PM</Text>
+                                        <HStack>
+                                            <Text fontWeight="semibold" color="#e1ad01">Domingo:</Text>
+                                            <Text>10:00 AM - 8:00 PM</Text>
+                                        </HStack>
+                                        <HStack>
+                                            <Text fontWeight="semibold" color="#e1ad01">Miércoles:</Text>
+                                            <Text>7:00 PM - 9:00 PM</Text>
+                                        </HStack>
                                     </VStack>
-                                </HStack>
+                                </InfoItem>
                             </VStack>
                         </MotionBox>
 
-                        <Button
-                            size="lg"
-                            bg="brand.500"
-                            color="white"
-                            _hover={{ bg: 'brand.600' }}
-                            leftIcon={<FaMapMarkerAlt />}
-                            onClick={() => window.open('https://maps.google.com', '_blank')}
+                        <MotionBox
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.02 }}
+                            width="100%"
                         >
-                            Cómo Llegar
-                        </Button>
+                            <Button
+                                size="lg"
+                                bg="#e1ad01"
+                                color="gray.900"
+                                fontWeight="bold"
+                                width={{ base: "100%", md: "auto" }}
+                                px={8}
+                                py={6}
+                                fontSize="lg"
+                                leftIcon={<FaMapMarkerAlt />}
+                                onClick={() => window.open('https://maps.google.com', '_blank')}
+                                _hover={{
+                                    bg: '#c99801',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 8px 20px rgba(225, 173, 1, 0.4)'
+                                }}
+                                _active={{
+                                    bg: '#b08801',
+                                    transform: 'translateY(0)'
+                                }}
+                                transition="all 0.3s ease"
+                            >
+                                Cómo Llegar
+                            </Button>
+                        </MotionBox>
                     </VStack>
 
                     <MotionBox
@@ -83,10 +154,25 @@ const Location = () => {
                         transition={{ duration: 0.5 }}
                         viewport={{ once: true }}
                         width="100%"
-                        height="500px"
-                        borderRadius="lg"
+                        height={{ base: "400px", md: "550px" }}
+                        borderRadius="xl"
                         overflow="hidden"
-                        boxShadow="xl"
+                        boxShadow="0 20px 40px rgba(0,0,0,0.3)"
+                        border="3px solid"
+                        borderColor="#e1ad01"
+                        position="relative"
+                        _before={{
+                            content: '""',
+                            position: 'absolute',
+                            top: '-2px',
+                            left: '-2px',
+                            right: '-2px',
+                            bottom: '-2px',
+                            background: 'linear-gradient(45deg, #e1ad01, transparent, #e1ad01)',
+                            borderRadius: 'xl',
+                            zIndex: '-1',
+                            opacity: 0.5
+                        }}
                     >
                         <Box
                             as="iframe"
@@ -97,6 +183,7 @@ const Location = () => {
                             allowFullScreen=""
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
+                            filter="grayscale(20%) brightness(0.9)"
                         />
                     </MotionBox>
                 </SimpleGrid>

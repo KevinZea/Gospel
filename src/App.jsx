@@ -8,6 +8,7 @@ import Location from './components/Location';
 import Footer from './components/Footer';
 import Donations from './components/Donations';
 import UpcomingEvents from './components/UpcomingEvents';
+import './fonts.css';
 
 function App() {
   return (
